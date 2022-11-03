@@ -3,6 +3,7 @@
     "name": "RNCourse",
     "slug": "RNCourse",
     "version": "1.0.0",
+    "owner": "julienlucas",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -19,16 +20,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.julienlucas.RNCourse"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.julienlucas.RNCourse"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "edbde22d-459c-48c6-9e74-b3b9a256e149"
+      }
     }
   }
 }
