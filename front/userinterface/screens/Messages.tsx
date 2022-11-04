@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
-import { TouchableHighlight, FlatList, Text, StyleSheet,  } from 'react-native';
+import { TouchableHighlight, FlatList, View, StyleSheet,  } from 'react-native';
 import {
   getMessagesUC,
   getSelectedMessageUC,
@@ -11,7 +11,7 @@ import {
   setSelectedRealtorUC,
 } from '../../domain/usecases/realtors.usecase';
 import { Message } from '../../domain/entities/message.interface';
-import { RootStackScreenProps } from '../../../navigation/index.interface';
+import { RootStackScreenProps } from '../../../navigation/index.d';
 import { useAppDispatch, useTypedSelector } from '../../store/store';
 import { getFomatedDate } from '../../services/helpers';
 import { globalStyles } from '../../services/globalstyles/index';
@@ -22,7 +22,7 @@ import IconMailOpen from '../../../assets/icons/icon-mail-open.svg';
 import IconMail from '../../../assets/icons/icon-mail.svg';
 
 const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) => {
-  const [messageId, setMessageId] = useState<string>('');
+  const [_, setMessageId] = useState<string>('');
   const dispatch = useAppDispatch();
   const state = useTypedSelector((state) => state);
   const { selectedRealtorId } = state;
@@ -46,7 +46,7 @@ const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) =>
   }, [route]);
 
   return (
-    <SMailList>
+    <View>
       <FlatList
         data={state.messages}
         keyExtractor={(item) => item.id.toString()}
@@ -66,6 +66,7 @@ const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) =>
                   <STextH3 readStatus={message.read} style={globalStyles.h3}>
                     {message.contact?.firstname} {message.contact?.lastname}
                   </STextH3>
+
                   <SDate readStatus={message.read}>{getFomatedDate(message.date)}</SDate>
                   <STextSubject readStatus={message.read} style={globalStyles.p}>Email {message.id}</STextSubject>
                   <SBody>{message?.body?.split(' ').slice(0, 12).join(' ')}...</SBody>
@@ -78,10 +79,15 @@ const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) =>
             return (
               <TouchableHighlight onPress={() => showMessageDetails(message)} underlayColor={theme.lightGrey}>
                 <SMessage style={ message.read && { backgroundColor: theme.lightGrey }}>
-                  <IconPhone style={styles.IconPhone} fill={message.read ? theme.darkGrey : '#5009DC'}/>
+                  <IconPhone
+                    style={styles.IconPhone}
+                    fill={message.read ? theme.darkGrey : '#5009DC'}
+                  />
+
                   <STextH3 readStatus={message.read} style={globalStyles.h3}>
                     {message.contact?.firstname} {message.contact?.lastname}
                   </STextH3>
+
                   <SDate readStatus={message.read}>{getFomatedDate(message.date)}</SDate>
                   <STextSubject readStatus={message.read} style={globalStyles.p}>{message.subject}</STextSubject>
                   <SBody>{message.subject}</SBody>
@@ -93,7 +99,7 @@ const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) =>
           return null
         }}
       />
-    </SMailList>
+    </View>
   );
 };
 
@@ -119,10 +125,6 @@ const styles = StyleSheet.create({
     width: 20
   }
 });
-
-const SMailList = styled.View`
-  background: white;
-`;
 
 const SDate = styled.Text`
   position: absolute;

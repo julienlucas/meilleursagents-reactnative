@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ColorSchemeName, Image, Text } from 'react-native';
 
-import { RootStackParamList, RootDrawerParamList } from './index.interface';
+import { RootStackParamList } from './index.d';
 import Messages from '../front/userinterface/screens/Messages';
 import Message from '../front/userinterface/screens/Message';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -23,7 +23,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const Drawer = createDrawerNavigator<RootDrawerParamList>();
+const Drawer = createDrawerNavigator<RootStackParamList>();
 
 function Root() {
   const state = useTypedSelector((state) => state);
