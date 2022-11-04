@@ -29,7 +29,7 @@ export const getFomatedDate = (time: any): string => {
   var seconds = (+new Date() - time) / 1000,
     list_choice = 1;
 
-  function isToday(date) {
+  function isToday(date: Date) {
     const today = new Date();
 
     if (today.toDateString() === date.toDateString()) {
@@ -39,7 +39,7 @@ export const getFomatedDate = (time: any): string => {
     return false;
   }
 
-  if (seconds < 86400 && !isToday) {
+  if (seconds < 86400) {
     return moment(date).format('h:mm a');
   }
 

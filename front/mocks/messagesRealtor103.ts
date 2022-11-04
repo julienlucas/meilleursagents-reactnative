@@ -1,13 +1,18 @@
+const today = new Date();
+
+const yesterday = new Date(today.getTime());
+yesterday.setDate(today.getDate() - 1);
+
 export const messagesRealtor103 = [
   {
-    body: "Lorem Ipsum #10300 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    body: "Lorem Ipsum #10100 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum #10100 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum #10100 is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     contact: {
       email: 'randerson@gmail.com',
       firstname: 'Richard',
       lastname: 'Anderson',
       phone: '0668447735',
     },
-    date: '2022-10-28T10:27:22.263925',
+    date: today.toString(),
     id: 10300,
     read: false,
     subject: 'SMS #10300',
@@ -21,7 +26,7 @@ export const messagesRealtor103 = [
       lastname: 'Smith',
       phone: '0622368451',
     },
-    date: '2022-10-13T10:27:22.263973',
+    date: yesterday.toString(),
     id: 10301,
     read: false,
     subject: 'Appel #10301',
@@ -35,7 +40,7 @@ export const messagesRealtor103 = [
       lastname: 'Miller',
       phone: '0689597604',
     },
-    date: '2022-10-30T10:27:22.264029',
+    date: yesterday.toString(),
     id: 10302,
     read: false,
     subject: 'Email #10302',

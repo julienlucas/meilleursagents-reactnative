@@ -24,7 +24,6 @@ export const getRealtorsUC = createAsyncThunk(
 export const setSelectedRealtorUC = createAsyncThunk(
   'realtors/setSelectedRealtor',
   async (realtorId: string) => {
-    localStorage.setItem('selectedRealtorId', realtorId.toString());
     return realtorId;
   },
 );

@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 
 export default function useCachedResources() {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+  const [isLoadingComplete, setLoadingComplete] = useState<boolean>(false);
 
   // Load any resources or data that we need prior to rendering the app
   useEffect(() => {
@@ -16,6 +16,7 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'space-mono-bold': require('../assets/fonts/SpaceMono-Bold.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

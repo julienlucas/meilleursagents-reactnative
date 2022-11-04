@@ -3,62 +3,32 @@ import { Store } from '../domain/entities/store.interface';
 import {
   getMessagesUC,
   getSelectedMessageUC,
-  setDefaultSelectedMessageUC,
-  getMessagesPaginatedUC,
   setMessageReadedUC,
-  setSelectedMessageKeyPressUC,
 } from '../domain/usecases/messages.usecase';
 import { getRealtorsUC, setSelectedRealtorUC } from '../domain/usecases/realtors.usecase';
 import { messagesRealtor101 } from '../mocks/messagesRealtor101';
+import { realtors } from '../mocks/realtors';
 
 export const initialState: Store = {
   realtors: [],
-  messages: messagesRealtor101,
+  messages: [],
   selectedRealtorId: '',
   selectedMessageId: '',
-  // selectedRealtorId: localStorage.getItem('selectedRealtorId') || '',
-  // selectedMessageId: localStorage.getItem('selectedMessageId') || '',
   selectedMessage: null,
-  unreadCount: 0,
-  page: 1,
+  unreadCount: 0
 };
 
 const slice = createSlice({
   name: 'reducers',
   initialState,
-  reducers: {
-    setPage(state) {
-      state = {
-        ...state,
-        page: state.page + 1,
-      };
-      return state;
-    },
-    resetPage(state) {
-      state = {
-        ...state,
-        page: 1,
-      };
-      return state;
-    },
-    resetStore() {
-      return initialState;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(getMessagesUC.fulfilled, (state, { payload }) => {
         // @ts-ignore: Unreachable code error
         state.messages = payload;
       })
-      .addCase(getMessagesPaginatedUC.fulfilled, (state, { payload }) => {
-        state.messages = state.messages.concat(payload);
-      })
       .addCase(getSelectedMessageUC.fulfilled, (state, { payload }) => {
-        state.selectedMessage = payload;
-        state.selectedMessageId = payload.id.toString();
-      })
-      .addCase(setDefaultSelectedMessageUC.fulfilled, (state, { payload }) => {
         state.selectedMessage = payload;
         state.selectedMessageId = payload.id.toString();
       })
@@ -74,13 +44,9 @@ const slice = createSlice({
       .addCase(setSelectedRealtorUC.fulfilled, (state, { payload }) => {
         state.selectedRealtorId = payload;
       })
-      .addCase(setSelectedMessageKeyPressUC.fulfilled, (state, { payload }) => {
-        state.selectedMessage = payload;
-        state.selectedMessageId = payload.id.toString();
-      });
   },
 });
 
-export const { setPage, resetPage, resetStore } = slice.actions;
+export const { } = slice.actions;
 
 export default slice.reducer;

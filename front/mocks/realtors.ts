@@ -1,4 +1,4 @@
-export const relators = [
+export const realtors = [
   {
     id: 101,
     logo: 'http://placehold.it/100x100?text=Agence+101',

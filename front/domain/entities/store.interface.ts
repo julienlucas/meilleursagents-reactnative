@@ -8,5 +8,4 @@ export interface Store {
   selectedMessageId: string;
   selectedMessage: Message | null;
   unreadCount: number;
-  page: number;
 }
