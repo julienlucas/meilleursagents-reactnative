@@ -1,22 +1,26 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ColorSchemeName, Image, Text } from 'react-native';
+import styled from 'styled-components/native';
+import { getRealtorsUC } from '../front/domain/usecases/realtors.usecase';
 
-import { RootStackParamList } from './index.d';
 import Messages from '../front/userinterface/screens/Messages';
 import Message from '../front/userinterface/screens/Message';
+import { RootStackParamList } from './index.d';
+
 import LinkingConfiguration from './LinkingConfiguration';
-
-import { useTypedSelector, store } from '../front/store/store';
-
-import styled from 'styled-components/native';
+import { useAppDispatch, useTypedSelector, store } from '../front/store/store';
 import { theme } from '../front/services/theme';
 import IconMailOpen from '../assets/icons/icon-mail-open.svg';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -26,8 +30,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
 function Root() {
+  const dispatch = useAppDispatch();
   const state = useTypedSelector((state) => state);
   const { unreadCount } = state;
+
+  useEffect(() => {
+    dispatch(getRealtorsUC("101"));
+  }, []);
 
   return (
     <Drawer.Navigator

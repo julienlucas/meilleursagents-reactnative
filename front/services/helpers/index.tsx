@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const getFomatedDate = (time: any): string => {
+export const getFomatedDate = (time: any): string | number => {
   const date = time;
   switch (typeof time) {
     case 'number':

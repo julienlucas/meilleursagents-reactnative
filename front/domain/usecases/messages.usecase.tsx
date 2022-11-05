@@ -1,10 +1,6 @@
-import MessagesGateway from '../../infrastructure/MessagesGateway';
-import RealtorsGateway from '../../infrastructure/RealtorsGateway';
 import { Message } from '../entities/message.interface';
-import { Realtor } from '../entities/realtor.interface';
 import { Store } from '../entities/store.interface';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 
 import { messagesRealtor101 } from '../../mocks/messagesRealtor101';
 import { messagesRealtor102 } from '../../mocks/messagesRealtor102';
@@ -38,21 +34,23 @@ export const getSelectedMessageUC = createAsyncThunk(
   'messages/fetchSelectedMessage',
   async (messageId: string, { getState }): Promise<Message> => {
     const state: Store | any = getState();
-    // const message = state.messages.filter((message: Message) => message.id.toString() === messageId);
-    return state.messages[0];
+    const message = state.messages.filter((message: Message) => message.id.toString() === messageId)[0];
+
+    return message;
   },
 );
 
 export const setMessageReadedUC = createAsyncThunk(
   'messages/postMessageAsReaded',
-  async (
-    { realtorId, messageId }: { realtorId: string; messageId: string },
-    { getState },
-  ): Promise<{
+  async (messageId: string, { getState }): Promise<{
     messages: Message[];
     unreadCount: number;
   }> => {
     const state: Store | any = getState();
+
+    const message = state.messages.filter((message: Message) => message.id === Number(messageId))[0];
+    const unreadCount = message.read ? state.unreadCount : state.unreadCount - 1;
+
     const messages = state.messages.map((message: Message) => {
       if (message.id.toString() === messageId) {
         return {...message, read: true }
@@ -61,10 +59,6 @@ export const setMessageReadedUC = createAsyncThunk(
       return message
     });
 
-    // const unreadCount = state.realtors.filter(
-    //   (realtor: Realtor) => realtor.id === Number(realtorId),
-    // )[0].unread_messages;
-
-    return { messages, unreadCount: 90 };
+    return { messages, unreadCount };
   },
 );

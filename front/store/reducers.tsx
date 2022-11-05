@@ -6,8 +6,6 @@ import {
   setMessageReadedUC,
 } from '../domain/usecases/messages.usecase';
 import { getRealtorsUC, setSelectedRealtorUC } from '../domain/usecases/realtors.usecase';
-import { messagesRealtor101 } from '../mocks/messagesRealtor101';
-import { realtors } from '../mocks/realtors';
 
 export const initialState: Store = {
   realtors: [],
@@ -25,7 +23,6 @@ const slice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getMessagesUC.fulfilled, (state, { payload }) => {
-        // @ts-ignore: Unreachable code error
         state.messages = payload;
       })
       .addCase(getSelectedMessageUC.fulfilled, (state, { payload }) => {

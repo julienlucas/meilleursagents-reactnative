@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
 import { TouchableHighlight, FlatList, View, StyleSheet,  } from 'react-native';
 import {
@@ -25,24 +25,26 @@ const Messages: React.FC<RootStackScreenProps<any>> = ({ navigation, route }) =>
   const [_, setMessageId] = useState<string>('');
   const dispatch = useAppDispatch();
   const state = useTypedSelector((state) => state);
-  const { selectedRealtorId } = state;
+  const { params } = route;
+  const realtorId = params?.realtorId;
 
   const showMessageDetails = (message: Message): void => {
     const { id } = message;
     const messageId = id.toString();
 
     setMessageId(messageId);
-    dispatch(setMessageReadedUC({ realtorId: selectedRealtorId, messageId }));
+    dispatch(setMessageReadedUC(messageId));
     dispatch(getSelectedMessageUC(messageId));
     navigation.navigate('Message');
   };
 
-  useEffect(() => {
-    dispatch(setSelectedRealtorUC(route?.params?.realtorId));
+  useLayoutEffect(() => {
+    dispatch(setSelectedRealtorUC(realtorId));
   }, [navigation]);
 
   useLayoutEffect(() => {
-    dispatch(getMessagesUC(route?.params?.realtorId));
+    dispatch(getMessagesUC(realtorId));
+    dispatch(getRealtorsUC(realtorId));
   }, [route]);
 
   return (

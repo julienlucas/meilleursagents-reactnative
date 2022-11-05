@@ -21,14 +21,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.julienlucas.RNCourse"
+      "bundleIdentifier": "com.julienlucas.RNMeilleurAgent"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5009dc"
       },
-      "package": "com.julienlucas.RNCourse"
+      "package": "com.julienlucas.RNMeilleurAgent"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

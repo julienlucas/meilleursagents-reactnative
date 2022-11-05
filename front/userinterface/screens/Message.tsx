@@ -4,9 +4,10 @@ import { theme } from '../../services/theme';
 import moment from 'moment';
 import { useTypedSelector } from '../../store/store';
 import { globalStyles } from '../../services/globalstyles/index';
+import { RootStackScreenProps } from '../../../navigation/index.d';
 import IconMailOpen from '../../../assets/icons/icon-mail-open.svg';
 
-const Messages: React.FC = () => {
+const Messages: React.FC<RootStackScreenProps<any>> = () => {
   const state = useTypedSelector((state) => state);
   const { selectedMessage } = state;
 
@@ -43,9 +44,7 @@ const Messages: React.FC = () => {
           {selectedMessage?.contact?.lastname}
         </STextH3>
 
-        <SDate>
-          {moment(selectedMessage?.date).format('MMMM Do YYYY, h:mm a')}
-        </SDate>
+        <SDate>{moment(selectedMessage?.date).format('MMMM Do YYYY, h:mm a')}</SDate>
         {selectedMessage?.body && (
           <Text>{selectedMessage?.body}</Text>
         )}

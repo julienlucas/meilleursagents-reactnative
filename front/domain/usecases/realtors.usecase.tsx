@@ -1,23 +1,15 @@
-import RealtorsGateway from '../../infrastructure/RealtorsGateway';
 import { Realtor } from '../entities/realtor.interface';
+import { realtors } from '../../mocks/realtors';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getRealtorsUC = createAsyncThunk(
   'realtors/fetchRealtors',
   async (realtorId: string) => {
-    const realtorsGateway = RealtorsGateway.getInstance();
+    const unreadCount = realtors.filter(
+      (realtor: Realtor) => realtor.id === Number(realtorId),
+    )[0].unread_messages;
 
-    try {
-      const realtors = await realtorsGateway.getRealtors();
-      const unreadCount = realtors.filter(
-        (realtor: Realtor) => realtor.id === Number(realtorId),
-      )[0].unread_messages;
-
-      return { realtors, unreadCount };
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    return { realtors, unreadCount };
   },
 );
 
