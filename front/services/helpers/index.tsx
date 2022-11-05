@@ -40,11 +40,11 @@ export const getFomatedDate = (time: any): string | number => {
   }
 
   if (seconds < 86400) {
-    return moment(date).format('h:mm a');
+    return moment(new Date(date)).format('h:mm a');
   }
 
   if (seconds > 172800) {
-    return moment(date).format('D/M/YY');
+    return moment(new Date(date)).format('D/M/YY');
   }
 
   var i = 0,

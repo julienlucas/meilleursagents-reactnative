@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ColorSchemeName, Image, Text } from 'react-native';
+import { ColorSchemeName, Image, Text, Share, TouchableHighlight } from 'react-native';
 import styled from 'styled-components/native';
 import { getRealtorsUC } from '../front/domain/usecases/realtors.usecase';
 
@@ -62,6 +62,27 @@ function Root() {
 
 function RootNavigator() {
   const state = useTypedSelector((state) => state);
+  const { selectedMessage } = state
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          `Meilleur Agent : ${selectedMessage?.subject} de ${selectedMessage?.contact.firstname} ${selectedMessage?.contact.lastname}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  };
 
   return (
     <Stack.Navigator initialRouteName={'Root'}>
@@ -81,7 +102,12 @@ function RootNavigator() {
         component={Message}
         options={{
           title: state?.selectedMessage?.subject || 'Message',
-          headerTintColor: theme.purple
+          headerTintColor: theme.purple,
+          headerRight: () => (
+            <SShare onPress={onShare} underlayColor={theme.lightPurple}>
+              <Text style={{color: 'white', paddingHorizontal: 8}}>Partager</Text>
+            </SShare>
+          )
         }}
       />
     </Stack.Navigator>
@@ -95,6 +121,18 @@ const SButtonUnreadCounter = styled.View`
   height: 31px;
   color: white;
   background-color: ${() => (store.getState().unreadCount === 0 ? theme.darkGrey : theme.purple)};
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-size: 16px;
+  transition: 0.1s;
+`;
+
+const SShare = styled.TouchableHighlight`
+  width: auto;
+  height: 31px;
+  background-color: ${theme.purple};
   border-radius: 8px;
   align-items: center;
   justify-content: center;
