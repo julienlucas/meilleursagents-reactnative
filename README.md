@@ -1,6 +1,6 @@
 # Aviv Frontend Technical Test
 
-[![Aviv logo](images/logo-aviv.png)](https://www.aviv-group.com/)
+[![Aviv logo](assets/images/logo-aviv.png)](https://www.aviv-group.com/)
 
 ## Presentation
 
@@ -25,7 +25,7 @@ When you are done, there's a few questions to answer in the [SOLUTION.md](SOLUTI
 
 This repository being a template, it's possible to create a new project using this one as a [template](https://github.com/MeilleursAgents/frontend-technical-test/generate). Check the big green `Template` button. Thanks to let the generated project as a private one.
 
-[![repository](images/dépôt-privé.png)](https://github.com/MeilleursAgents/FrontendTechTest/generate)
+[![repository](assets/images/dépôt-privé.png)](https://github.com/MeilleursAgents/FrontendTechTest/generate)
 
 Alternatively, you can always clone this repository.
 
